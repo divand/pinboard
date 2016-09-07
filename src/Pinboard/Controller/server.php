@@ -707,7 +707,7 @@ function getSlowPagesCount($conn, $serverName, $hostName) {
 
     $sql = '
         SELECT
-            COUNT(*)
+            COUNT(DISTINCT request_id) cnt
         FROM
             ipm_req_time_details
         WHERE
@@ -718,7 +718,7 @@ function getSlowPagesCount($conn, $serverName, $hostName) {
 
     $data = $conn->fetchAll($sql, $params);
 
-    return (int)$data[0]['COUNT(*)'];
+    return (int)$data[0]['cnt'];
 }
 
 function getSlowPages($conn, $serverName, $hostName, $startPos, $rowCount, $colOrder, $colDir) {
